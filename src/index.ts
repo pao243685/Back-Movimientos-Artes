@@ -5,10 +5,27 @@ import artworksRouter from "./routes/artworks.route";
 
 dotenv.config();
 
-const app = express();
 const PORT = process.env.PORT;
+const FRONTEND_URL = process.env.FRONTEND_URL;
+const MET_BASE_URL = process.env.MET_BASE_URL;
 
-app.use(cors());
+if (!MET_BASE_URL) {
+  console.error("Falta la variable de entorno MET_BASE_URL");
+  process.exit(1);
+}
+
+const app = express();
+
+const allowedOrigins = FRONTEND_URL ? [FRONTEND_URL] : [];
+
+app.use(
+  cors({
+    origin: process.env.NODE_ENV === "production" ? allowedOrigins : "*",
+    methods: ["GET"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
+
 app.use(express.json());
 
 app.use("/api/artworks", artworksRouter);
