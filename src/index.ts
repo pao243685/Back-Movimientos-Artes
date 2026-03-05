@@ -20,7 +20,7 @@ const allowedOrigins = FRONTEND_URL ? [FRONTEND_URL] : [];
 
 app.use(
   cors({
-    origin: process.env.NODE_ENV === "production" ? allowedOrigins : "*",
+    origin: FRONTEND_URL,
     methods: ["GET"],
     allowedHeaders: ["Content-Type"],
   })
