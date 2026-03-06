@@ -16,11 +16,11 @@ if (!MET_BASE_URL) {
 
 const app = express();
 
-const allowedOrigins = FRONTEND_URL ? [FRONTEND_URL] : [];
+const allowedOrigins = FRONTEND_URL 
 
 app.use(
   cors({
-    origin: FRONTEND_URL,
+    origin: allowedOrigins,
     methods: ["GET"],
     allowedHeaders: ["Content-Type"],
   })
